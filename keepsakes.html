@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Customized Keepsake – Handmade by CRJ</title>
+<meta name="description" content="Request a custom crochet bouquet, coin purse, bag or keepsake made just for you.">
+<link rel="icon" href="assets/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-collection="Keepsakes">
+<header>
+  <a class="logo" href="index.html"><img src="assets/logo.png" alt="Handmade by CRJ logo"><span>Handmade by CRJ</span></a>
+  <nav class="menu" aria-label="Main"><a href="index.html">Home</a><a href="bouquets.html">Bouquets</a><a href="coin-purses.html">Coin Purses</a><a href="bags.html">Bags</a><a href="keepsakes.html" class="on">Customized Keepsake</a></nav>
+  <nav><button class="cartbtn" onclick="openCart()" aria-label="Open basket">Basket<span id="count">0</span></button></nav>
+</header>
+<div class="pagehead"><div class="eyebrow">Made just for you</div><h1>Customized Keepsake</h1><p>A bouquet, coin purse, bag or small keepsake in your colours, with a name or message if you like.</p></div>
+<div class="perks"><span>100% Handmade</span><span>UAE Delivery</span><span>Gift-Ready Wrapping</span><span>Order on WhatsApp</span></div>
+<section id="request" style="background:var(--soft)">
+  <div class="title"><h2>Customized Keepsake Request</h2><p>Tell us what you have in mind and we’ll reply on WhatsApp with a quote.</p></div>
+  <form id="customForm">
+    <div class="two">
+      <label>Your name<input name="name" required autocomplete="name"></label>
+      <label>What would you like made?<select name="item"><option>Custom bouquet</option><option>Coin purse</option><option>Bag</option><option>Keychain / keepsake</option><option>Gift set</option><option>Something else</option></select></label>
+    </div>
+    <div class="two">
+      <label>Mobile / WhatsApp<input name="phone" type="tel" required autocomplete="tel" placeholder="+971 5X XXX XXXX"></label>
+      <label>Email<input name="email" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+    </div>
+    <div class="two">
+      <label>Occasion<select name="occ"><option>Birthday</option><option>Wedding</option><option>Anniversary</option><option>Graduation</option><option>Mother’s Day</option><option>Just because</option></select></label>
+      <label>Quantity<input name="num" type="number" min="1" value="1"></label>
+    </div>
+    <label>Budget (AED)<input name="budget" type="number" min="0" placeholder="e.g. 200"></label>
+    <label>Colours, name or design<input name="colors" placeholder="Blush pink with the name “Sara”…" required></label>
+    <label>Inspiration photo(s) <span class="note">(optional, up to 3)</span><input type="file" id="photo" name="photo" accept="image/*" multiple></label>
+    <div id="thumbs" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+    <label>…or paste a photo link<input name="link" type="url" placeholder="Instagram or Pinterest link"></label>
+    <p class="note">After you tap send, WhatsApp opens. Attach your photo(s) in the chat so we can see your inspiration. 📎</p>
+    <label>Extra details<textarea name="notes" rows="3" placeholder="Ribbon colour, message card, needed-by date…"></textarea></label>
+    <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+    <button class="btn wa" type="submit">Send request on WhatsApp</button>
+  </form>
+</section>
+<section id="shop">
+  <div class="title"><h2>Ready-made Keepsakes</h2></div>
+  <div class="filters" id="filters"></div>
+  <div class="grid" id="grid" data-hide-empty="1"></div>
+</section>
+<footer>© 2026 Handmade by CRJ · UAE</footer>
+
+<div id="veil" onclick="closeCart()"></div>
+<aside id="drawer" aria-label="Shopping basket">
+  <div class="row"><h2>Your Basket</h2><button class="cartbtn" onclick="closeCart()">Close</button></div>
+  <div id="items"></div>
+  <div class="total"><span>Total</span><span id="total">AED 0</span></div>
+  <form id="orderForm" style="padding:16px;box-shadow:none">
+    <h3>Delivery details</h3>
+    <label>Full name<input name="name" required autocomplete="name"></label>
+    <label>Phone / WhatsApp<input name="phone" type="tel" required autocomplete="tel" placeholder="+971 5X XXX XXXX"></label>
+    <label>Email<input name="email" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+    <div class="two">
+      <label>Emirate<select name="emirate"><option>Ajman</option><option>Sharjah</option><option>Dubai</option><option>Abu Dhabi</option><option>Umm Al Quwain</option><option>Ras Al Khaimah</option><option>Fujairah</option></select></label>
+      <label>Delivery date<input name="date" type="date"></label>
+    </div>
+    <label>Address<textarea name="addr" rows="2" required placeholder="Area, street, building, flat, landmark"></textarea></label>
+    <label>Gift message (optional)<input name="gift"></label>
+    <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+    <button class="btn wa" type="submit">Place order on WhatsApp</button>
+    <p class="note">Delivery fee and payment (cash on delivery or bank transfer) will be confirmed with you on WhatsApp.</p>
+  </form>
+</aside>
+
+<script src="assets/config.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

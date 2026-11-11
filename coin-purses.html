@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Coin Purse Collections – Handmade by CRJ</title>
+<meta name="description" content="Handmade crochet coin purses, delivered across the UAE.">
+<link rel="icon" href="assets/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-collection="Coin Purses">
+<header>
+  <a class="logo" href="index.html"><img src="assets/logo.png" alt="Handmade by CRJ logo"><span>Handmade by CRJ</span></a>
+  <nav class="menu" aria-label="Main"><a href="index.html">Home</a><a href="bouquets.html">Bouquets</a><a href="coin-purses.html" class="on">Coin Purses</a><a href="bags.html">Bags</a><a href="keepsakes.html">Customized Keepsake</a></nav>
+  <nav><button class="cartbtn" onclick="openCart()" aria-label="Open basket">Basket<span id="count">0</span></button></nav>
+</header>
+<div class="pagehead"><div class="eyebrow">Collection</div><h1>Coin Purse Collections</h1><p>Small crochet purses, made to order. Please allow 2–4 days.</p></div>
+<div class="perks"><span>100% Handmade</span><span>UAE Delivery</span><span>Gift-Ready Wrapping</span><span>Order on WhatsApp</span></div>
+<section id="shop">
+  <div class="filters" id="filters"></div>
+  <div class="grid" id="grid" data-empty="Our coin purse collection is being added. Request yours on the Customized Keepsake page."></div>
+</section>
+<section style="background:var(--soft)">
+  <div class="title"><h2>Want something different?</h2><p>We can make it in your colours, with your name or initials.</p></div>
+  <p style="text-align:center"><a class="btn" href="keepsakes.html#request">Request a custom piece</a></p>
+</section>
+<footer>© 2026 Handmade by CRJ · UAE</footer>
+
+<div id="veil" onclick="closeCart()"></div>
+<aside id="drawer" aria-label="Shopping basket">
+  <div class="row"><h2>Your Basket</h2><button class="cartbtn" onclick="closeCart()">Close</button></div>
+  <div id="items"></div>
+  <div class="total"><span>Total</span><span id="total">AED 0</span></div>
+  <form id="orderForm" style="padding:16px;box-shadow:none">
+    <h3>Delivery details</h3>
+    <label>Full name<input name="name" required autocomplete="name"></label>
+    <label>Phone / WhatsApp<input name="phone" type="tel" required autocomplete="tel" placeholder="+971 5X XXX XXXX"></label>
+    <label>Email<input name="email" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+    <div class="two">
+      <label>Emirate<select name="emirate"><option>Ajman</option><option>Sharjah</option><option>Dubai</option><option>Abu Dhabi</option><option>Umm Al Quwain</option><option>Ras Al Khaimah</option><option>Fujairah</option></select></label>
+      <label>Delivery date<input name="date" type="date"></label>
+    </div>
+    <label>Address<textarea name="addr" rows="2" required placeholder="Area, street, building, flat, landmark"></textarea></label>
+    <label>Gift message (optional)<input name="gift"></label>
+    <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+    <button class="btn wa" type="submit">Place order on WhatsApp</button>
+    <p class="note">Delivery fee and payment (cash on delivery or bank transfer) will be confirmed with you on WhatsApp.</p>
+  </form>
+</aside>
+
+<script src="assets/config.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
