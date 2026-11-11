@@ -157,8 +157,8 @@ footer{text-align:center;padding:36px 5%;background:var(--plum);color:#cdb79a;fo
 // ★ Replace with your WhatsApp number: country code + number, digits only
 const WA = "971547116821";
 // ★ Google Sheet connection: paste your Apps Script web app URL, and the same secret text you set as TOKEN in the script.
-const SHEET_URL = "";
-const SHEET_TOKEN = "";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbzYQTz8-ZBpk5zmVq7qF08acjpleuzfxL1PHTDa4YRcujsvChnBZ7tdCdrk-R7N4K62yw/exec";
+const SHEET_TOKEN = "dd3e7706d2e97fad2cfac79e26a62531a539f046d95b54df";
 function sendToSheet(data){
  if(!SHEET_URL)return;
  try{fetch(SHEET_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(Object.assign({token:SHEET_TOKEN},data)),keepalive:true}).catch(()=>{})}catch(e){}
