@@ -109,13 +109,17 @@ footer{text-align:center;padding:36px 5%;background:var(--plum);color:#cdb79a;fo
       <label>Number of flowers<input name="num" type="number" min="1" value="12"></label>
       <label>Budget (AED)<input name="budget" type="number" min="0" placeholder="e.g. 200"></label>
     </div>
-    <label>Email<input name="email" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+    <div class="two">
+      <label>Mobile / WhatsApp<input name="phone" type="tel" required autocomplete="tel" placeholder="+971 5X XXX XXXX"></label>
+      <label>Email<input name="email" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+    </div>
     <label>Preferred colours &amp; flowers<input name="colors" placeholder="Blush pink roses, cream tulips…" required></label>
     <label>Inspiration photo(s) <span class="note">(optional, up to 3)</span><input type="file" id="photo" name="photo" accept="image/*" multiple></label>
     <div id="thumbs" style="display:flex;gap:8px;flex-wrap:wrap"></div>
     <label>…or paste a photo link<input name="link" type="url" placeholder="Instagram or Pinterest link"></label>
     <p class="note">After you tap send, WhatsApp opens. Attach your photo(s) in the chat so we can see your inspiration. 📎</p>
     <label>Extra details<textarea name="notes" rows="3" placeholder="Ribbon colour, message card, needed-by date…"></textarea></label>
+    <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
     <button class="btn wa" type="submit">Send request on WhatsApp</button>
   </form>
 </section>
@@ -143,6 +147,7 @@ footer{text-align:center;padding:36px 5%;background:var(--plum);color:#cdb79a;fo
     </div>
     <label>Address<textarea name="addr" rows="2" required placeholder="Area, street, building, flat, landmark"></textarea></label>
     <label>Gift message (optional)<input name="gift"></label>
+    <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
     <button class="btn wa" type="submit">Place order on WhatsApp</button>
     <p class="note">Delivery fee and payment (cash on delivery or bank transfer) will be confirmed with you on WhatsApp.</p>
   </form>
@@ -151,6 +156,13 @@ footer{text-align:center;padding:36px 5%;background:var(--plum);color:#cdb79a;fo
 <script>
 // ★ Replace with your WhatsApp number: country code + number, digits only
 const WA = "971547116821";
+// ★ Google Sheet connection: paste your Apps Script web app URL, and the same secret text you set as TOKEN in the script.
+const SHEET_URL = "";
+const SHEET_TOKEN = "";
+function sendToSheet(data){
+ if(!SHEET_URL)return;
+ try{fetch(SHEET_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(Object.assign({token:SHEET_TOKEN},data)),keepalive:true}).catch(()=>{})}catch(e){}
+}
 const P = [
  {id:1,n:"Blush Rose Bouquet",c:"Roses",p:85,d:"Seven soft pink crochet roses with green leaves.",col:["#f4a6c0","#f7c6d6","#e98aab"]},
  {id:2,n:"Cream Tulip Bunch",c:"Tulips",p:70,d:"Ten cream and peach tulips, wrapped in kraft paper.",col:["#fff0d6","#fbd9b8","#fff6e5"]},
@@ -195,10 +207,12 @@ function closeCart(){$("#drawer").classList.remove("open");$("#veil").classList.
 function wa(msg){window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,"_blank")}
 $("#orderForm").addEventListener("submit",e=>{e.preventDefault();const f=new FormData(e.target);let t=0;
  const lines=Object.keys(cart).map(id=>{const p=P.find(x=>x.id==id);t+=p.p*cart[id];return `• ${cart[id]} × ${p.n} – ${AED(p.p*cart[id])}`});
+ sendToSheet({type:"order",website:f.get("website")||"",name:f.get("name"),phone:f.get("phone"),email:f.get("email"),emirate:f.get("emirate"),address:f.get("addr"),deliveryDate:f.get("date")||"",items:lines.join("\n"),total:t,gift:f.get("gift")||""});
  wa(`Hello Handmade by CRJ! I’d like to order:\n${lines.join("\n")}\n\nTotal: ${AED(t)} (excl. delivery)\n\nName: ${f.get("name")}\nPhone: ${f.get("phone")}\nEmail: ${f.get("email")}\nEmirate: ${f.get("emirate")}\nAddress: ${f.get("addr")}\nDelivery date: ${f.get("date")||"Flexible"}\nGift message: ${f.get("gift")||"-"}`)});
 $("#photo").addEventListener("change",e=>{const t=$("#thumbs");t.innerHTML="";const fs=[...e.target.files].slice(0,3);if(e.target.files.length>3){alert("Please choose up to 3 photos.");e.target.value="";return}fs.forEach(f=>{const i=document.createElement("img");i.src=URL.createObjectURL(f);i.alt="Inspiration photo";i.style.cssText="width:84px;height:84px;object-fit:cover;border-radius:12px;border:1.5px solid var(--line)";t.appendChild(i)})});
 $("#customForm").addEventListener("submit",e=>{e.preventDefault();const f=new FormData(e.target);
- wa(`Hello Handmade by CRJ! Custom bouquet request:\nName: ${f.get("name")}\nEmail: ${f.get("email")}\nOccasion: ${f.get("occ")}\nFlowers: ${f.get("num")}\nBudget: ${f.get("budget")?AED(f.get("budget")):"Open"}\nColours/flowers: ${f.get("colors")}\nDetails: ${f.get("notes")||"-"}\nInspiration link: ${f.get("link")||"-"}\nInspiration photo(s): ${$("#photo").files.length?$("#photo").files.length+" photo(s), I’ll attach in this chat now 📎":"none"}`)});
+ sendToSheet({type:"custom",website:f.get("website")||"",name:f.get("name"),phone:f.get("phone"),email:f.get("email"),occasion:f.get("occ"),flowers:f.get("num"),budget:f.get("budget"),colours:f.get("colors"),link:f.get("link")||"",notes:f.get("notes")||""});
+ wa(`Hello Handmade by CRJ! Custom bouquet request:\nName: ${f.get("name")}\nPhone: ${f.get("phone")}\nEmail: ${f.get("email")}\nOccasion: ${f.get("occ")}\nFlowers: ${f.get("num")}\nBudget: ${f.get("budget")?AED(f.get("budget")):"Open"}\nColours/flowers: ${f.get("colors")}\nDetails: ${f.get("notes")||"-"}\nInspiration link: ${f.get("link")||"-"}\nInspiration photo(s): ${$("#photo").files.length?$("#photo").files.length+" photo(s), I’ll attach in this chat now 📎":"none"}`)});
 $("#waChat").href=`https://wa.me/${WA}?text=${encodeURIComponent("Hello Handmade by CRJ! I have a question.")}`;
 Object.keys(cart).forEach(id=>{const p=P.find(x=>x.id==id);if(!p||p.stock<=0)delete cart[id];else if(cart[id]>p.stock)cart[id]=p.stock});save();renderShop();renderCart();
 </script>
