@@ -27,9 +27,10 @@
       <label>What would you like made?<select name="item"><option>Custom bouquet</option><option>Coin purse</option><option>Bag</option><option>Keychain / keepsake</option><option>Gift set</option><option>Something else</option></select></label>
     </div>
     <div class="two">
-      <label>Mobile / WhatsApp<input name="phone" type="tel" required autocomplete="tel" placeholder="+971 5X XXX XXXX"></label>
-      <label>Email<input name="email" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+      <label>Mobile number<input name="phone" type="tel" required autocomplete="tel" placeholder="+971 5X XXX XXXX"></label>
+      <label>WhatsApp number <span class="note">(leave blank if it is the same as your mobile)</span><input name="whatsapp" type="tel" autocomplete="tel" placeholder="+971 5X XXX XXXX"></label>
     </div>
+    <label>Email<input name="email" type="email" required autocomplete="email" placeholder="you@example.com"></label>
     <div class="two">
       <label>Occasion<select name="occ"><option>Birthday</option><option>Wedding</option><option>Anniversary</option><option>Graduation</option><option>Mother’s Day</option><option>Just because</option></select></label>
       <label>Quantity<input name="num" type="number" min="1" value="1"></label>
@@ -60,7 +61,8 @@
   <form id="orderForm" style="padding:16px;box-shadow:none">
     <h3>Delivery details</h3>
     <label>Full name<input name="name" required autocomplete="name"></label>
-    <label>Phone / WhatsApp<input name="phone" type="tel" required autocomplete="tel" placeholder="+971 5X XXX XXXX"></label>
+    <label>Mobile number<input name="phone" type="tel" required autocomplete="tel" placeholder="+971 5X XXX XXXX"></label>
+    <label>WhatsApp number <span class="note">(leave blank if it is the same as your mobile)</span><input name="whatsapp" type="tel" autocomplete="tel" placeholder="+971 5X XXX XXXX"></label>
     <label>Email<input name="email" type="email" required autocomplete="email" placeholder="you@example.com"></label>
     <div class="two">
       <label>Emirate<select name="emirate"><option>Ajman</option><option>Sharjah</option><option>Dubai</option><option>Abu Dhabi</option><option>Umm Al Quwain</option><option>Ras Al Khaimah</option><option>Fujairah</option></select></label>
